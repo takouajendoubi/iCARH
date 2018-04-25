@@ -33,7 +33,7 @@ iCARH.model = function(X, Y, drug, pathways, tau=1.2, NA_value=-99999, ...){
   y_i_mis = which(is.na(Y), arr.ind = T);
   y_i_obs = which(!is.na(Y), arr.ind = T);
   Y[which(is.na(Y))] =  NA_value;
-  adjmat = lapply(pathways, function(x) 1/(x+1)) #To check
+  adjmat = lapply(pathways, function(x) 1/(x+1))
   adjmat = lapply(adjmat, function(x) {diag(x)=0; 1/max(rowSums(x>0))*x})
   lambdas = lapply(adjmat,function(x) sort(eigen(x)$values)[c(1,nrow(x))]);
   regression.stan = "
